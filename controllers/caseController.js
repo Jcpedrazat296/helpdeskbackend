@@ -3,6 +3,12 @@ const cases = require("../data/cases.json");
 const fs = require("fs");
 const path = require("path");
 
+// 📌 LISTAR CASOS
+exports.getCases = (req, res) => {
+  res.json(cases);
+};
+
+// 📌 CREAR CASO
 exports.createCase = (req, res) => {
   const { titulo, descripcion, categoria } = req.body;
 
@@ -28,14 +34,11 @@ exports.createCase = (req, res) => {
     ]
   };
 
-  // 🧠 Guardar en memoria
   cases.push(newCase);
 
-  // 💾 Guardar en archivo JSON
   const filePath = path.join(__dirname, "../data/cases.json");
   fs.writeFileSync(filePath, JSON.stringify(cases, null, 2));
 
-  // 📤 Responder al frontend
   res.status(201).json({
     message: "Caso creado correctamente",
     caso: newCase

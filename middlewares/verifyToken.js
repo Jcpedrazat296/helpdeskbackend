@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
       process.env.JWT_SECRET || "clave_secreta"
     );
 
-    req.user = decoded; // disponible en controllers
+    req.user = decoded;
     next();
   } catch (error) {
     return res.status(401).json({ message: "Token inválido o expirado" });
